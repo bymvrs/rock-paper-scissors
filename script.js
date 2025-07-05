@@ -14,10 +14,9 @@ function getHumanChoice() {
   return prompt("Rock, paper or scissors?").toLowerCase();
 }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-
 function playGame() {
+  let roundsPlayed = 0;
+
   let humanScore = 0;
   let computerScore = 0;
 
@@ -35,7 +34,12 @@ function playGame() {
       console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
       computerScore++;
     }
+    roundsPlayed++;
   }
 
-  playRound(humanChoice, computerChoice);
+  while (roundsPlayed < 5) {
+    playRound(getHumanChoice(), getComputerChoice());
+  }
 }
+
+playGame();
