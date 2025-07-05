@@ -40,6 +40,22 @@ function playGame() {
   while (roundsPlayed < 5) {
     playRound(getHumanChoice(), getComputerChoice());
   }
+
+  if (roundsPlayed == 5) {
+    if (humanScore == computerScore) {
+      console.log(
+        `Game's over! It's a tie! - Player: ${humanScore} - Computer: ${computerScore}`
+      );
+    } else if (humanScore > computerScore) {
+      console.log(
+        `Game's over! Player wins! - Player: ${humanScore} - Computer: ${computerScore}`
+      );
+    } else {
+      console.log(
+        `Game's over! Computer wins! - Player: ${humanScore} - Computer: ${computerScore}`
+      );
+    }
+  }
 }
 
 playGame();
