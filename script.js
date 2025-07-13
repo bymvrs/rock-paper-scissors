@@ -13,6 +13,10 @@ function getComputerChoice() {
 function playGame() {
   const choices = document.querySelectorAll(".pokemon-container img");
 
+  const roundDisplay = document.querySelector(".round-display span");
+  const humanScoreDisplay = document.querySelector(".player-score span");
+  const computerScoreDisplay = document.querySelector(".computer-score span");
+
   choices.forEach((image) => {
     image.addEventListener("click", (e) => {
       const humanChoice = e.target.alt;
@@ -41,6 +45,10 @@ function playGame() {
       computerScore++;
     }
     roundsPlayed++;
+
+    roundDisplay.textContent = roundsPlayed;
+    humanScoreDisplay.textContent = humanScore;
+    computerScoreDisplay.textContent = computerScore;
   }
 
   if (roundsPlayed == 5) {
