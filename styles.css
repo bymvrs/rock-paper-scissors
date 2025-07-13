@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("./images/background.jpg");
+    background-size: 50%;
+    font-family: 'Pixelify Sans';
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+p {
+    font-size: 26px;
+}
+
+.round-display {
+    background-color: #d9d9d9;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+.scores-section {
+    display: flex;
+    justify-content: space-between;
+    width: 430px;
+}
+
+.round-result {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.game-section div, .choose-section div{
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.rotate {
+    transform: scaleX(-1);
+}
+
+.choose-section img {
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.choose-section img:hover {
+    scale: 1.2;
+}
