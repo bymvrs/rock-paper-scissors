@@ -37,10 +37,6 @@ function playGame() {
     roundsPlayed++;
   }
 
-  while (roundsPlayed < 5) {
-    playRound(getHumanChoice(), getComputerChoice());
-  }
-
   if (roundsPlayed == 5) {
     if (humanScore == computerScore) {
       console.log(
