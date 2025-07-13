@@ -2,11 +2,11 @@ function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3) + 1;
   switch (randomNumber) {
     case 1:
-      return "rock";
+      return "Bulbasaur";
     case 2:
-      return "paper";
+      return "Charmander";
     case 3:
-      return "scissors";
+      return "Squirtle";
   }
 }
 
