@@ -17,6 +17,9 @@ function playGame() {
   const humanScoreDisplay = document.querySelector(".player-score span");
   const computerScoreDisplay = document.querySelector(".computer-score span");
 
+  const roundResult = document.querySelector(".round-result");
+  const roundResultInfo = document.querySelector(".round-result-info");
+
   choices.forEach((image) => {
     image.addEventListener("click", (e) => {
       const humanChoice = e.target.alt;
@@ -32,16 +35,19 @@ function playGame() {
 
   function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-      console.log(`It's a tie! You both chose ${humanChoice}`);
+      roundResult.textContent = "It's a tie!";
+      roundResultInfo.textContent = `You both chose ${humanChoice}`;
     } else if (
       (humanChoice == "Bulbasaur" && computerChoice == "Squirtle") ||
       (humanChoice == "Charmander" && computerChoice == "Bulbasaur") ||
       (humanChoice == "Squirtle" && computerChoice == "Charmander")
     ) {
-      console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+      roundResult.textContent = "You win!";
+      roundResultInfo.textContent = `${humanChoice} beats ${computerChoice}`;
       humanScore++;
     } else {
-      console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+      roundResult.textContent = "You lose!";
+      roundResultInfo.textContent = `${computerChoice} beats ${humanChoice}`;
       computerScore++;
     }
     roundsPlayed++;
