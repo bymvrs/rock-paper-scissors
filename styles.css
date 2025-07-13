@@ -46,7 +46,7 @@ p {
     margin-bottom: 6px;
 }
 
-.game-section div, .choose-section div{
+.game-section div, .pokemon-container{
     max-width: 600px;
     display: flex;
     justify-content: center;
