@@ -10,11 +10,17 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  return prompt("Rock, paper or scissors?").toLowerCase();
-}
-
 function playGame() {
+  const choices = document.querySelectorAll(".pokemon-container img");
+
+  choices.forEach((image) => {
+    image.addEventListener("click", (e) => {
+      const humanChoice = e.target.alt;
+      const computerChoice = getComputerChoice();
+      playRound(humanChoice, computerChoice);
+    });
+  });
+
   let roundsPlayed = 0;
 
   let humanScore = 0;
@@ -24,9 +30,9 @@ function playGame() {
     if (humanChoice == computerChoice) {
       console.log(`It's a tie! You both chose ${humanChoice}`);
     } else if (
-      (humanChoice == "rock" && computerChoice == "scissors") ||
-      (humanChoice == "paper" && computerChoice == "rock") ||
-      (humanChoice == "scissors" && computerChoice == "paper")
+      (humanChoice == "Bulbasaur" && computerChoice == "Squirtle") ||
+      (humanChoice == "Charmander" && computerChoice == "Bulbasaur") ||
+      (humanChoice == "Squirtle" && computerChoice == "Charmander")
     ) {
       console.log(`You win! ${humanChoice} beats ${computerChoice}`);
       humanScore++;
