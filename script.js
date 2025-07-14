@@ -58,12 +58,11 @@ function playRound(playerChoice, computerChoice) {
 
   updateSelectionImages(playerChoice, computerChoice, winner);
   updateRoundResult(playerChoice, computerChoice, winner);
+  updatePlayerScores();
   
   roundsPlayed++;
 
   roundDisplay.textContent = roundsPlayed;
-  playerScoreDisplay.textContent = playerScore;
-  computerScoreDisplay.textContent = computerScore;
 
   if (playerScore == 5 || computerScore == 5) {
     choices.forEach((image) => {
@@ -116,4 +115,9 @@ function updateRoundResult(playerChoice, computerChoice, winner){
       roundResult.textContent = "It's a tie!";
       roundResultInfo.textContent = `You both chose ${playerChoice}`;
   }
+}
+
+function updatePlayerScores() {
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
 }
