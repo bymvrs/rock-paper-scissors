@@ -20,6 +20,9 @@ function playGame() {
   const roundResult = document.querySelector(".round-result");
   const roundResultInfo = document.querySelector(".round-result-info");
 
+  const humanSelectionImage = document.querySelector("img[alt='Player Selection']");
+  const computerSelectionImage = document.querySelector("img[alt='Computer Selection']");
+
   choices.forEach((image) => {
     image.addEventListener("click", (e) => {
       const humanChoice = e.target.alt;
@@ -34,7 +37,12 @@ function playGame() {
   let computerScore = 0;
 
   function playRound(humanChoice, computerChoice) {
+    humanSelectionImage.classList.remove("rotate");
+
     if (humanChoice == computerChoice) {
+      humanSelectionImage.src = `./images/pokemon/${humanChoice.toLowerCase()}_default.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
+
       roundResult.textContent = "It's a tie!";
       roundResultInfo.textContent = `You both chose ${humanChoice}`;
     } else if (
@@ -42,12 +50,18 @@ function playGame() {
       (humanChoice == "Charmander" && computerChoice == "Bulbasaur") ||
       (humanChoice == "Squirtle" && computerChoice == "Charmander")
     ) {
+      humanSelectionImage.src = `./images/pokemon/${humanChoice.toLowerCase()}_win.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
+
       roundResult.textContent = "You win!";
       roundResultInfo.textContent = `${humanChoice} beats ${computerChoice}`;
       humanScore++;
     } else {
+      humanSelectionImage.src = `./images/pokemon/${humanChoice.toLowerCase()}_default.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_win.png`;
+
       roundResult.textContent = "You lose!";
-      roundResultInfo.textContent = `${computerChoice} beats ${humanChoice}`;
+      roundResultInfo.textContent = `${humanChoice} loses to ${computerChoice}`;
       computerScore++;
     }
     roundsPlayed++;
