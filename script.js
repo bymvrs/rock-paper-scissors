@@ -38,12 +38,12 @@ function getPlayerChoice(e) {
 }
 
 function playRound(playerChoice, computerChoice) {
+  let winner;
+
   playerSelectionImage.classList.remove("rotate");
 
   if (playerChoice == computerChoice) {
-    playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_default.png`;
-    computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
-
+    winner = "";
     roundResult.textContent = "It's a tie!";
     roundResultInfo.textContent = `You both chose ${playerChoice}`;
   } else if (
@@ -51,20 +51,22 @@ function playRound(playerChoice, computerChoice) {
     (playerChoice == "Charmander" && computerChoice == "Bulbasaur") ||
     (playerChoice == "Squirtle" && computerChoice == "Charmander")
   ) {
-    playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_win.png`;
-    computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
+    winner = "Player";
 
     roundResult.textContent = "You win!";
     roundResultInfo.textContent = `${playerChoice} beats ${computerChoice}`;
+
     playerScore++;
   } else {
-    playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_default.png`;
-    computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_win.png`;
+    winner = "Computer";
 
     roundResult.textContent = "You lose!";
     roundResultInfo.textContent = `${playerChoice} loses to ${computerChoice}`;
     computerScore++;
   }
+
+  updateSelectionImages(playerChoice, computerChoice, winner);
+  
   roundsPlayed++;
 
   roundDisplay.textContent = roundsPlayed;
@@ -89,5 +91,21 @@ function playRound(playerChoice, computerChoice) {
       );
       audio.play();
     }
+  }
+}
+
+function updateSelectionImages(playerChoice, computerChoice, winner){
+  switch (winner) {
+    case "Player":
+      playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_win.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
+      break;
+    case "Computer":
+      playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_default.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_win.png`;
+      break;
+    default:
+      playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_default.png`;
+      computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
   }
 }
