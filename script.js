@@ -44,28 +44,20 @@ function playRound(playerChoice, computerChoice) {
 
   if (playerChoice == computerChoice) {
     winner = "";
-    roundResult.textContent = "It's a tie!";
-    roundResultInfo.textContent = `You both chose ${playerChoice}`;
   } else if (
     (playerChoice == "Bulbasaur" && computerChoice == "Squirtle") ||
     (playerChoice == "Charmander" && computerChoice == "Bulbasaur") ||
     (playerChoice == "Squirtle" && computerChoice == "Charmander")
   ) {
     winner = "Player";
-
-    roundResult.textContent = "You win!";
-    roundResultInfo.textContent = `${playerChoice} beats ${computerChoice}`;
-
     playerScore++;
   } else {
     winner = "Computer";
-
-    roundResult.textContent = "You lose!";
-    roundResultInfo.textContent = `${playerChoice} loses to ${computerChoice}`;
     computerScore++;
   }
 
   updateSelectionImages(playerChoice, computerChoice, winner);
+  updateRoundResult(playerChoice, computerChoice, winner);
   
   roundsPlayed++;
 
@@ -107,5 +99,21 @@ function updateSelectionImages(playerChoice, computerChoice, winner){
     default:
       playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_default.png`;
       computerSelectionImage.src = `./images/pokemon/${computerChoice.toLowerCase()}_default.png`;
+  }
+}
+
+function updateRoundResult(playerChoice, computerChoice, winner){
+  switch (winner) {
+    case "Player":
+      roundResult.textContent = "You win!";
+      roundResultInfo.textContent = `${playerChoice} beats ${computerChoice}`;
+      break;
+    case "Computer":
+      roundResult.textContent = "You lose!";
+      roundResultInfo.textContent = `${playerChoice} loses to ${computerChoice}`;
+      break;
+    default:
+      roundResult.textContent = "It's a tie!";
+      roundResultInfo.textContent = `You both chose ${playerChoice}`;
   }
 }
