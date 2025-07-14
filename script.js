@@ -59,33 +59,15 @@ function playRound(playerChoice, computerChoice) {
   updateSelectionImages(playerChoice, computerChoice, winner);
   updateRoundResult(playerChoice, computerChoice, winner);
   updatePlayerScores();
-  
+
   roundsPlayed++;
 
   roundDisplay.textContent = roundsPlayed;
 
-  if (playerScore == 5 || computerScore == 5) {
-    choices.forEach((image) => {
-      image.removeEventListener("click", getPlayerChoice);
-    });
-    roundResult.textContent = "Game's over!";
-    if (playerScore == 5) {
-      roundResultInfo.textContent = "Player wins!";
-      const audio = new Audio(
-        `./audios/${playerChoice.toLowerCase()}_audio.mp3`
-      );
-      audio.play();
-    } else {
-      roundResultInfo.textContent = "Computer wins!";
-      const audio = new Audio(
-        `./audios/${computerChoice.toLowerCase()}_audio.mp3`
-      );
-      audio.play();
-    }
-  }
+  if (playerScore == 5 || computerScore == 5) endGame(playerChoice, computerChoice);
 }
 
-function updateSelectionImages(playerChoice, computerChoice, winner){
+function updateSelectionImages(playerChoice, computerChoice, winner) {
   switch (winner) {
     case "Player":
       playerSelectionImage.src = `./images/pokemon/${playerChoice.toLowerCase()}_win.png`;
@@ -101,7 +83,7 @@ function updateSelectionImages(playerChoice, computerChoice, winner){
   }
 }
 
-function updateRoundResult(playerChoice, computerChoice, winner){
+function updateRoundResult(playerChoice, computerChoice, winner) {
   switch (winner) {
     case "Player":
       roundResult.textContent = "You win!";
@@ -120,4 +102,25 @@ function updateRoundResult(playerChoice, computerChoice, winner){
 function updatePlayerScores() {
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
+}
+
+function endGame(playerChoice, computerChoice) {
+  choices.forEach(image => {
+    image.removeEventListener("click", getPlayerChoice);
+  });
+
+  roundResult.textContent = "Game's over!";
+
+  if (playerScore == 5) {
+    roundResultInfo.textContent = "Player wins!";
+    playVictoryAudio(playerChoice);
+  } else {
+    roundResultInfo.textContent = "Computer wins!";
+    playVictoryAudio(computerChoice);
+  }
+}
+
+function playVictoryAudio(winnersChoice){
+  const audio = new Audio(`./audios/${winnersChoice.toLowerCase()}_audio.mp3`);
+  audio.play();
 }
