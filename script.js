@@ -20,16 +20,22 @@ function playGame() {
   const roundResult = document.querySelector(".round-result");
   const roundResultInfo = document.querySelector(".round-result-info");
 
-  const humanSelectionImage = document.querySelector("img[alt='Player Selection']");
-  const computerSelectionImage = document.querySelector("img[alt='Computer Selection']");
+  const humanSelectionImage = document.querySelector(
+    "img[alt='Player Selection']"
+  );
+  const computerSelectionImage = document.querySelector(
+    "img[alt='Computer Selection']"
+  );
 
   choices.forEach((image) => {
-    image.addEventListener("click", (e) => {
-      const humanChoice = e.target.alt;
-      const computerChoice = getComputerChoice();
-      playRound(humanChoice, computerChoice);
-    });
+    image.addEventListener("click", getHumanChoice);
   });
+
+  function getHumanChoice(e) {
+    const humanChoice = e.target.alt;
+    const computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+  }
 
   let roundsPlayed = 0;
 
@@ -69,21 +75,17 @@ function playGame() {
     roundDisplay.textContent = roundsPlayed;
     humanScoreDisplay.textContent = humanScore;
     computerScoreDisplay.textContent = computerScore;
-  }
 
-  if (roundsPlayed == 5) {
-    if (humanScore == computerScore) {
-      console.log(
-        `Game's over! It's a tie! - Player: ${humanScore} - Computer: ${computerScore}`
-      );
-    } else if (humanScore > computerScore) {
-      console.log(
-        `Game's over! Player wins! - Player: ${humanScore} - Computer: ${computerScore}`
-      );
-    } else {
-      console.log(
-        `Game's over! Computer wins! - Player: ${humanScore} - Computer: ${computerScore}`
-      );
+    if (humanScore == 5 || computerScore == 5) {
+      choices.forEach((image) => {
+        image.removeEventListener("click", getHumanChoice);
+      });
+      roundResult.textContent = "Game's over!";
+      if (humanScore == 5) {
+        roundResultInfo.textContent = "Player wins!";
+      } else {
+        roundResultInfo.textContent = "Computer wins!";
+      }
     }
   }
 }
