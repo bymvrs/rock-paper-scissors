@@ -83,8 +83,12 @@ function playGame() {
       roundResult.textContent = "Game's over!";
       if (humanScore == 5) {
         roundResultInfo.textContent = "Player wins!";
+        const audio = new Audio(`./audios/${humanChoice.toLowerCase()}_audio.mp3`);
+        audio.play();
       } else {
         roundResultInfo.textContent = "Computer wins!";
+        const audio = new Audio(`./audios/${computerChoice.toLowerCase()}_audio.mp3`);
+        audio.play();
       }
     }
   }
