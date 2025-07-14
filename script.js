@@ -1,3 +1,20 @@
+const choices = document.querySelectorAll(".pokemon-container img");
+
+const roundDisplay = document.querySelector(".round-display span");
+const humanScoreDisplay = document.querySelector(".player-score span");
+const computerScoreDisplay = document.querySelector(".computer-score span");
+
+const roundResult = document.querySelector(".round-result");
+const roundResultInfo = document.querySelector(".round-result-info");
+
+const humanSelectionImage = document.querySelector("img[alt='Player Selection']");
+const computerSelectionImage = document.querySelector("img[alt='Computer Selection']");
+
+let roundsPlayed = 0;
+
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3) + 1;
   switch (randomNumber) {
@@ -10,22 +27,6 @@ function getComputerChoice() {
   }
 }
 
-const choices = document.querySelectorAll(".pokemon-container img");
-
-const roundDisplay = document.querySelector(".round-display span");
-const humanScoreDisplay = document.querySelector(".player-score span");
-const computerScoreDisplay = document.querySelector(".computer-score span");
-
-const roundResult = document.querySelector(".round-result");
-const roundResultInfo = document.querySelector(".round-result-info");
-
-const humanSelectionImage = document.querySelector(
-  "img[alt='Player Selection']"
-);
-const computerSelectionImage = document.querySelector(
-  "img[alt='Computer Selection']"
-);
-
 choices.forEach((image) => {
   image.addEventListener("click", getHumanChoice);
 });
@@ -35,11 +36,6 @@ function getHumanChoice(e) {
   const computerChoice = getComputerChoice();
   playRound(humanChoice, computerChoice);
 }
-
-let roundsPlayed = 0;
-
-let humanScore = 0;
-let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
   humanSelectionImage.classList.remove("rotate");
