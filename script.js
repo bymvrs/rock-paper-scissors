@@ -15,6 +15,8 @@ let roundsPlayed = 0;
 let playerScore = 0;
 let computerScore = 0;
 
+let gameOver = false;
+
 function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3) + 1;
   switch (randomNumber) {
@@ -32,6 +34,7 @@ choices.forEach((image) => {
 });
 
 function getPlayerChoice(e) {
+  if (gameOver) return;
   const playerChoice = e.target.alt;
   const computerChoice = getComputerChoice();
   playRound(playerChoice, computerChoice);
@@ -105,9 +108,7 @@ function updatePlayerScores() {
 }
 
 function endGame(playerChoice, computerChoice) {
-  choices.forEach(image => {
-    image.removeEventListener("click", getPlayerChoice);
-  });
+  gameOver = true;
 
   roundResult.textContent = "Game's over!";
 
@@ -118,9 +119,44 @@ function endGame(playerChoice, computerChoice) {
     roundResultInfo.textContent = "Computer wins!";
     playVictoryAudio(computerChoice);
   }
+
+  displayReplayButton();
 }
 
 function playVictoryAudio(winnersChoice){
   const audio = new Audio(`./audios/${winnersChoice.toLowerCase()}_audio.mp3`);
   audio.play();
+}
+
+function displayReplayButton() {
+  const roundDisplayParagraph = document.querySelector(".round-display");
+
+  const replayButton = document.createElement("button");
+  replayButton.textContent = "Play again";
+  replayButton.classList.add("replay-button");
+
+  replayButton.addEventListener("click", () => {
+    gameOver = false;
+
+    replayButton.replaceWith(roundDisplayParagraph);
+
+    roundsPlayed = 0;
+    roundDisplay.textContent = roundsPlayed;
+
+    playerScore = 0;
+    computerScore = 0;
+    updatePlayerScores();
+
+    roundResult.textContent = "Game start";
+    roundResultInfo.textContent = "First player to reach five points wins";
+
+    playerSelectionImage.src = `./images/pokeball.png`;
+    playerSelectionImage.classList.add("rotate");
+    
+    computerSelectionImage.src = `./images/pokeball.png`;
+
+    replayButton.remove();
+  });
+
+  roundDisplayParagraph.replaceWith(replayButton);
 }
