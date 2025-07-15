@@ -28,7 +28,7 @@ p {
     font-size: 26px;
 }
 
-.round-display, .replay-button {
+.round-display, .replay-button, .start-button {
     background-color: #d9d9d9;
     padding: 6px 12px;
     border-radius: 5px;
@@ -67,7 +67,7 @@ p {
     scale: 1.2;
 }
 
-.replay-button {
+.replay-button, .start-button{
     font-size: 26px;
     font-family: 'Pixelify Sans';
     border: none;
@@ -75,6 +75,28 @@ p {
     transition: 0.5s;
 }
 
-.replay-button:hover {
+.replay-button:hover, .start-button:hover {
     scale: 1.1;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.how-to-play {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.how-to-play div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.how-to-play div span {
+    font-size: 28px;
 }
